@@ -1,0 +1,79 @@
+SCR_BaseGameMode GameMode_Plain1 : "{1B76F75A3175E85C}Prefabs/MP/Modes/Plain/GameMode_Plain.et" {
+ coords 7115.562 102.871 6279.536
+ m_bAllowFactionChange 0
+ m_bAdvanceTimeRequiresPlayers 0
+ {
+  SCR_AIWorld SCR_AIWorld : "{E0A05C76552E7F58}Prefabs/AI/SCR_AIWorld.et" {
+   coords -1.025 0.698 -0.519
+   {
+    CommentEntity {
+     coords 4.562 4.842 2.008
+     m_Comment "SCR_AIWorld: "\
+     "Configure navigation mesh"
+     m_Color 0 0 0
+     m_FaceCamera 1
+     m_TextBackground 1
+     m_BackgroundColor 1 0.6 0
+     m_BackgroundTransparency 0
+    }
+   }
+  }
+  PerceptionManager PerceptionManager : "{028DAEAD63E056BE}Prefabs/World/Game/PerceptionManager.et" {
+   coords -1.025 0.071 4.481
+  }
+  SCR_FactionManager FactionManager_USxUSSR : "{589540B35EBA8CDC}Prefabs/MP/Managers/Factions/FactionManager_USxUSSR.et" {
+   coords -1.025 0.449 1.481
+   {
+    CommentEntity {
+     coords 0 1 0
+     m_Comment "FactionManager_USxUSSR: "\
+     "Configure desired factions"
+     m_Color 0 0 0
+     m_FaceCamera 1
+     m_TextBackground 1
+     m_BackgroundColor 1 0.6 0
+     m_BackgroundTransparency 0
+    }
+   }
+  }
+  RadioManagerEntity RadioManager : "{B8E09FAB91C4ECCD}Prefabs/Radio/RadioManager.et" {
+   coords -1.025 0.187 3.481
+  }
+  ScriptedChatEntity ScriptedChatEntity : "{F69BC912AC8236F9}Prefabs/MP/ScriptedChatEntity.et" {
+   coords -1.025 -0.085 5.481
+  }
+  SCR_BaseTaskManager TaskManager : "{1AC69CD7907FB4F8}Prefabs/ScenarioFramework/Tasks/TaskManager.et" {
+   coords -1.025 0.621 0.481
+   {
+    CommentEntity {
+     coords 0 1 0
+     m_Comment "TaskManager: "\
+     "Needed for task generation"
+     m_Color 0 0 0
+     m_FaceCamera 1
+     m_TextBackground 1
+     m_BackgroundColor 1 0.6 0
+     m_BackgroundTransparency 0
+    }
+   }
+  }
+  SCR_LoadoutManager : "{AA4E7419A1FF65B0}Prefabs/MP/Managers/Loadouts/LoadoutManager_Base.et" {
+   coords 0 0 0
+   m_aPlayerLoadouts {
+    SCR_FactionPlayerLoadout "{64E35B28AA381BA7}" {
+     m_sLoadoutName "Soldat"
+     m_sLoadoutResource "{2F912ED6E399FF47}Prefabs/Characters/Factions/BLUFOR/US_Army/Character_US_Unarmed.et"
+     m_sAffiliatedFaction "US"
+    }
+    SCR_PlayerArsenalLoadout "{64E35B286F4B7A52}" {
+     m_sLoadoutName "ArsenalLoadout"
+     m_sLoadoutResource "{2F912ED6E399FF47}Prefabs/Characters/Factions/BLUFOR/US_Army/Character_US_Unarmed.et"
+     m_sAffiliatedFaction "US"
+    }
+   }
+  }
+  SCR_SpawnPoint : "{E7F4D5562F48DDE4}Prefabs/MP/Spawning/SpawnPoint_Base.et" {
+   coords 5.165 5.312 -48.949
+  }
+ }
+}
