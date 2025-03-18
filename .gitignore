@@ -1,0 +1,20 @@
+# Dossiers de Workbench
+*.gproj
+*.gproj.user
+*.bak
+*.lock
+*.log
+*.tmp
+*.cache
+*.bin
+
+# Dossiers de compilation
+/Temp/
+/Bin/
+/Logs/
+/.ensc/
+/EnfusionCache/
+
+# Fichiers de configuration utilisateur
+*.ini
+*.json
