@@ -1,0 +1,12 @@
+SCR_ChimeraCharacter {
+ ID "520EC961A090B1EE"
+ components {
+  SCR_BaseHUDComponent "{520EA1D2DB118134}" {
+   InfoDisplays {
+    JH_SCR_PlayerHUD "{5CDCF78652BDD9FF}" {
+     m_LayoutPath "{930DD1A1615C1F4F}UI/Layouts/HUD/JH_L_PlayerHUD.layout"
+    }
+   }
+  }
+ }
+}

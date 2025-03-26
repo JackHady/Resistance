@@ -1,0 +1,29 @@
+FrameWidgetClass {
+ Name "rootFrame"
+ {
+  CanvasWidgetClass "{64F08DD677D4F204}" {
+   Name "Canvas0"
+   Slot FrameWidgetSlot "{64F08DD677D4F24B}" {
+   }
+  }
+  UserWidgetClass "{64F08DD6B0B78A71}" {
+   Name "User0"
+   Slot FrameWidgetSlot "{64F08DD6B0B78AB4}" {
+   }
+  }
+  BlurWidgetClass "{64F08DD6EC5DED96}" {
+   Name "Blur0"
+   Slot FrameWidgetSlot "{64F08DD6EC5DEBE7}" {
+    PositionX -1.799
+    OffsetLeft -1.799
+    PositionY 1
+    OffsetTop 1
+    SizeX 1924.53
+    OffsetRight -1922.73
+    SizeY 1085.71
+    OffsetBottom -1086.71
+   }
+   Intensity 1
+  }
+ }
+}
