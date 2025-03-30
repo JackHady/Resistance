@@ -1,5 +1,9 @@
-EL_GameModeRoleplay GameMode_Roleplay1 : "{03913608C59017A3}Prefabs/MP/Modes/Roleplay/GameMode_Roleplay.et" {
- coords 7121.652 101.235 6279.426
+JH_GameModeRoleplay GameMode_Resistance_RP1 : "{03913608C59017A3}Prefabs/MP/Modes/Roleplay/GameMode_Resistance_RP.et" {
+ components {
+  SCR_SupportStationManagerComponent "{64FD2A561F764881}" {
+  }
+ }
+ coords 7130.963 103.883 6248.986
 }
 EPF_SpawnPoint : "{260C1BEFBF9AA86B}Prefabs/MP/Spawn/SpawnPoint_LIFE.et" {
  coords 7115.997 102.597 6279.033

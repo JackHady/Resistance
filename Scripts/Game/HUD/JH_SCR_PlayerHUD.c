@@ -135,7 +135,7 @@ class JH_SCR_PlayerHUD : SCR_InfoDisplay
 		}
 
 		m_wThirstProgress.SetMaskProgress(value);
-		//m_bStatChange = true;
+		m_bStatChange = true;
 	}
 
 	//---------------------------------------------------------------------
@@ -154,7 +154,7 @@ class JH_SCR_PlayerHUD : SCR_InfoDisplay
 		}
 
 		m_wHungerProgress.SetMaskProgress(value);
-		//m_bStatChange = true;
+		m_bStatChange = true;
 	}
 
 	//---------------------------------------------------------------------
@@ -167,7 +167,7 @@ class JH_SCR_PlayerHUD : SCR_InfoDisplay
 		}
 
 		m_wMoneyIndicator.SetText("$ " + EL_FormatUtils.AbbreviateNumber(newAmount)); //for configurabiluity could have the $ changeable in config...
-		//m_bStatChange = true;
+		m_bStatChange = true;
 	}
 
 	//---------------------------------------------------------------------
@@ -182,6 +182,18 @@ class JH_SCR_PlayerHUD : SCR_InfoDisplay
 		m_wPlayerStatsHUD = HorizontalLayoutWidget.Cast(m_wRoot.FindAnyWidget("m_playerStatsHUD"));
 
 		if (!m_wPlayerStatsHUD) return;
+
+		if (m_bEnableHunger)
+        {
+            m_wHungerIndicator = OverlayWidget.Cast(m_wPlayerStatsHUD.FindAnyWidget("m_hungerIndicator"));
+            if (!m_wHungerIndicator) return;
+        }
+
+        if (m_bEnableThirst)
+        {
+            m_wThirstIndicator = OverlayWidget.Cast(m_wPlayerStatsHUD.FindAnyWidget("m_thirstIndicator"));
+            if (!m_wThirstIndicator) return;
+        }
 
 		if (m_bEnableHealth)
 		{
@@ -202,18 +214,6 @@ class JH_SCR_PlayerHUD : SCR_InfoDisplay
 			}
 		}
 
-		if (m_bEnableHunger)
-		{
-			m_wHungerIndicator = OverlayWidget.Cast(m_wPlayerStatsHUD.FindAnyWidget("m_hungerIndicator"));
-			if (!m_wHungerIndicator) return;
-		}
-
-		if (m_bEnableThirst)
-		{
-			m_wThirstIndicator = OverlayWidget.Cast(m_wPlayerStatsHUD.FindAnyWidget("m_thirstIndicator"));
-			if (!m_wThirstIndicator) return;
-		}
-
 		// Init cash display and subscribe to balance changes
 		int currentCash = EL_MoneyUtils.GetCash(owner);
 		OnMoneyChange(EL_MoneyUtils.PREFAB_CASH, currentCash, currentCash);
@@ -228,9 +228,10 @@ class JH_SCR_PlayerHUD : SCR_InfoDisplay
 		if (!m_PlayerController) return;
 
 		m_bStatChange = false;
+		if (m_bEnableThirst) OnThirstChange(m_PlayerController.GetHydration() / 1.0);
+        if (m_bEnableHunger) OnHungerChange(m_PlayerController.GetEnergy() / 1.0);
 		if (m_bEnableHealth) OnHealthChange(m_DMC.GetHealth());
 		if (m_bEnableStamina) OnStaminaChange(m_PlayerController.GetStamina());
-		//TODO: Get info from Survival Stats Components
 
 		if (m_bStatChange)
 		{
@@ -267,12 +268,12 @@ class JH_SCR_PlayerHUD : SCR_InfoDisplay
 	//! TODO: Make this only call every once and a while similar to the fade
 	void SetProgressColor(Widget bar, Widget outline, float value)
 	{
-		if (value >= 0.65)
+		if (value >= 0.5)
 		{
 			bar.SetColor(Color.White);
 			outline.SetColor(Color.White);
 		}
-		else if (value > 0.35 && value < 0.65)
+		else if (value > 0.25 && value < 0.5)
 		{
 			bar.SetColor(Color.Yellow);
 			outline.SetColor(Color.Yellow);
