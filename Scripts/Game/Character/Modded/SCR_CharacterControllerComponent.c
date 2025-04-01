@@ -9,7 +9,9 @@ modded class SCR_CharacterControllerComponent
     private bool m_bIsThirsty = false; // Tracks if the player is thirsty
     private bool m_bIsHungry = false; // Tracks if the player is hungry
 	
-	private int MetabolismDelay = 30; // Update every x Seconds
+	protected const float HUNGER_DECAY_RATE = 0.05; // Per tick
+    protected const float THIRST_DECAY_RATE = 0.07; // Per tick
+    protected const float TICK_INTERVAL = 10; // secondes
 
     IEntity characterOwner;
 
@@ -19,9 +21,26 @@ modded class SCR_CharacterControllerComponent
         characterOwner = owner;
 
         if (EntityUtils.GetPlayer() != owner) return;
+		
+		InputManager inputManager = GetGame().GetInputManager();
+	    if (!inputManager) return;
+	
+	    // Vérifie si un consommable est tenu avant d'ajouter l'input
+	    if (HasConsumableItem())
+	    {
+	        inputManager.AddActionListener("IA_HoldF", EActionTrigger.DOWN, ConsumeItem);
+	    }
 
-        GetGame().GetCallqueue().CallLater(UpdateMetabolism, MetabolismDelay * 1000, true, 1);
+        GetGame().GetCallqueue().CallLater(UpdateMetabolism, TICK_INTERVAL * 1000, true, 1);
     }
+	
+	bool HasConsumableItem()
+	{
+	    IEntity item = GetHeldItem();
+	    if (!item) return false;
+	
+	    return item.FindComponent(SCR_ConsumableEffectBase) != null;
+	}
 
     void UpdateMetabolism(float timeSlice)
 	{
@@ -41,7 +60,7 @@ modded class SCR_CharacterControllerComponent
     {
         if (m_fHydration > 0)
         {
-            m_fHydration = Math.Clamp(m_fHydration - (0.01428 * timeSlice), 0.0, 1.0);
+            m_fHydration = Math.Clamp(m_fHydration - THIRST_DECAY_RATE, 0.0, 1.0);
         }
         else
         {
@@ -61,7 +80,7 @@ modded class SCR_CharacterControllerComponent
     {
         if (m_fEnergy > 0)
         {
-            m_fEnergy = Math.Clamp(m_fEnergy - (0.01316 * timeSlice), 0.0, 1.0);
+            m_fEnergy = Math.Clamp(m_fEnergy - HUNGER_DECAY_RATE, 0.0, 1.0);
         }
         else
         {
